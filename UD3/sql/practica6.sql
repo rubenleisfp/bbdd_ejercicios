@@ -95,19 +95,24 @@ INSERT INTO Escribe (numero_registro, dni) VALUES
 
 /*
 ¿Cuántos ejemplares tiene la revista "Ciencia Hoy"?
+select count(*) from numrevista where numero=1
 
 Respuesta: "Ciencia Hoy" tiene 2 ejemplares vendidos.
 ¿En qué sucursal trabaja Juan Pérez?
-
+select * from empleado where nombre = 'Juan Perez';
+select * from sucursal where codigo = 1;
 Respuesta: Juan Pérez trabaja en la sucursal con código 1.
+
 ¿Cuál es la especialidad de la periodista Laura Gómez?
-
+SELECT especialidad FROM bbdd_editorial.periodista where nombre='Laura Gomez';
 Respuesta: La especialidad de Laura Gómez es ciencia.
+
 ¿Cuántos páginas tiene el segundo fascículo de la revista "Viajes y Aventuras"?
-
+SELECT num_paginas FROM bbdd_editorial.numrevista where numero_registro=2 and numero=1;
 Respuesta: El segundo fascículo de "Viajes y Aventuras" tiene 18 páginas.
+
 ¿Quién escribió el primer artículo para la revista "Moda & Estilo"?
-
+SELECT DNI FROM bbdd_editorial.escribe where numero_registro =3;
+select * from bbdd_editorial.periodista where dni=333333333;
 Respuesta: El primer artículo para la revista "Moda & Estilo" fue escrito por Ana García.
-
 */

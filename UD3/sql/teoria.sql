@@ -46,6 +46,22 @@ SELECT
 -- MEDIUMBLOB	For BLOBs (Binary Large OBjects). Holds up to 16,777,215 bytes of data
 
 
+-- ########## Ejercicio 3.3.2 CREAR TABLA EJEMPLO ############
+CREATE SCHEMA ud3bbdd1;
+use ud3bbdd1;
+
+CREATE TABLE ud3bbdd1.empleado (
+  id INT NOT NULL,
+ nombre VARCHAR(45) NULL,
+ horas DECIMAL(3,1) NULL,
+ fecha DATE NULL,
+  PRIMARY KEY (id));
+
+INSERT INTO ud3bbdd1.empleado (id, nombre, horas, fecha) VALUES ('1', 'PEPE', 11, '1993-01-01');
+INSERT INTO ud3bbdd1.empleado (id, nombre, horas, fecha) VALUES ('2', 'LOLA', 10, '1997-01-01');
+
+
+
 -- ########## Ejercicio 3.3.2.5 OPERADORES COMPARACION ############
 SELECT * FROM ud3bbdd1.empleado where nombre = "LOLA"; -- a
 SELECT * FROM ud3bbdd1.empleado where horas >=10; -- b
