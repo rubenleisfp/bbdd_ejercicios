@@ -8,15 +8,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema bbdd_repuestos_gamer
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `bbdd_repuestos_gamer` ;
-
--- -----------------------------------------------------
--- Schema bbdd_repuestos_gamer
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bbdd_repuestos_gamer` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
--- -----------------------------------------------------
 -- Schema bbdd_eventos_dam
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `bbdd_eventos_dam` ;
@@ -25,167 +16,6 @@ DROP SCHEMA IF EXISTS `bbdd_eventos_dam` ;
 -- Schema bbdd_eventos_dam
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `bbdd_eventos_dam` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `bbdd_repuestos_gamer` ;
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`articulo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`articulo` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`articulo` (
-  `num_articulo` INT NOT NULL,
-  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
-  `precio` DECIMAL(10,2) NULL DEFAULT NULL,
-  PRIMARY KEY (`num_articulo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`cliente`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`cliente` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`cliente` (
-  `num_cliente` INT NOT NULL,
-  `nif` VARCHAR(20) NOT NULL,
-  `nombre` VARCHAR(100) NOT NULL,
-  `apellido1` VARCHAR(100) NOT NULL,
-  `apellido2` VARCHAR(100) NULL DEFAULT NULL,
-  `limite_credito` DECIMAL(10,2) NULL DEFAULT NULL,
-  `saldo` DECIMAL(10,2) NULL DEFAULT NULL,
-  `descuento` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`num_cliente`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`direccion`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`direccion` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`direccion` (
-  `id_direccion` INT NOT NULL AUTO_INCREMENT,
-  `nombre_via` VARCHAR(255) NULL DEFAULT NULL,
-  `numero` VARCHAR(10) NULL DEFAULT NULL,
-  `piso` VARCHAR(10) NULL DEFAULT NULL,
-  `portal` VARCHAR(10) NULL DEFAULT NULL,
-  `cod_postal` VARCHAR(10) NULL DEFAULT NULL,
-  `ciudad` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_direccion`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`cliente_direccionenvio`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`cliente_direccionenvio` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`cliente_direccionenvio` (
-  `numero_cliente` INT NOT NULL,
-  `id_direccion` INT NOT NULL,
-  PRIMARY KEY (`numero_cliente`, `id_direccion`),
-  INDEX `fk_cliente_has_direccionenvio_direccionenvio1_idx` (`id_direccion` ASC) VISIBLE,
-  INDEX `fk_cliente_has_direccionenvio_cliente1_idx` (`numero_cliente` ASC) VISIBLE,
-  CONSTRAINT `fk_cliente_has_direccionenvio_cliente1`
-    FOREIGN KEY (`numero_cliente`)
-    REFERENCES `bbdd_repuestos_gamer`.`cliente` (`num_cliente`),
-  CONSTRAINT `fk_cliente_has_direccionenvio_direccionenvio1`
-    FOREIGN KEY (`id_direccion`)
-    REFERENCES `bbdd_repuestos_gamer`.`direccion` (`id_direccion`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`fabrica`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`fabrica` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`fabrica` (
-  `num_fabrica` INT NOT NULL,
-  `telefono` VARCHAR(15) NULL DEFAULT NULL,
-  PRIMARY KEY (`num_fabrica`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`fabrica_articulo`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`fabrica_articulo` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`fabrica_articulo` (
-  `num_fabrica` INT NOT NULL,
-  `num_articulo` INT NOT NULL,
-  `cantidad_comprada` INT NULL DEFAULT NULL,
-  PRIMARY KEY (`num_fabrica`, `num_articulo`),
-  INDEX `numero_articulo` (`num_articulo` ASC) VISIBLE,
-  CONSTRAINT `fabricaarticulo_ibfk_1`
-    FOREIGN KEY (`num_fabrica`)
-    REFERENCES `bbdd_repuestos_gamer`.`fabrica` (`num_fabrica`),
-  CONSTRAINT `fabricaarticulo_ibfk_2`
-    FOREIGN KEY (`num_articulo`)
-    REFERENCES `bbdd_repuestos_gamer`.`articulo` (`num_articulo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`pedido`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`pedido` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`pedido` (
-  `num_pedido` INT NOT NULL,
-  `num_cliente` INT NULL DEFAULT NULL,
-  `fecha` DATE NULL DEFAULT NULL,
-  `id_direccion` INT NOT NULL,
-  PRIMARY KEY (`num_pedido`),
-  INDEX `numero_cliente` (`num_cliente` ASC) VISIBLE,
-  INDEX `fk_pedido_direccionenvio1_idx` (`id_direccion` ASC) VISIBLE,
-  CONSTRAINT `fk_pedido_direccionenvio1`
-    FOREIGN KEY (`id_direccion`)
-    REFERENCES `bbdd_repuestos_gamer`.`direccion` (`id_direccion`),
-  CONSTRAINT `pedido_ibfk_1`
-    FOREIGN KEY (`num_cliente`)
-    REFERENCES `bbdd_repuestos_gamer`.`cliente` (`num_cliente`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `bbdd_repuestos_gamer`.`linea_pedido`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_repuestos_gamer`.`linea_pedido` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_repuestos_gamer`.`linea_pedido` (
-  `num_pedido` INT NOT NULL,
-  `num_articulo` INT NOT NULL,
-  `cantidad` INT NOT NULL,
-  PRIMARY KEY (`num_pedido`, `num_articulo`),
-  INDEX `fk_detallepedido_articulo1_idx` (`num_articulo` ASC) VISIBLE,
-  INDEX `fk_linea_pedido_pedido1_idx` (`num_pedido` ASC) VISIBLE,
-  CONSTRAINT `fk_detallepedido_articulo1`
-    FOREIGN KEY (`num_articulo`)
-    REFERENCES `bbdd_repuestos_gamer`.`articulo` (`num_articulo`),
-  CONSTRAINT `fk_linea_pedido_pedido1`
-    FOREIGN KEY (`num_pedido`)
-    REFERENCES `bbdd_repuestos_gamer`.`pedido` (`num_pedido`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
 USE `bbdd_eventos_dam` ;
 
 -- -----------------------------------------------------
@@ -196,14 +26,15 @@ DROP TABLE IF EXISTS `bbdd_eventos_dam`.`categoria` ;
 CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`categoria` (
   `id_categoria` INT NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(255) NOT NULL,
-  `id_categoria_superior` INT NULL DEFAULT NULL,
+  `id_categoria_superior` INT NULL,
   PRIMARY KEY (`id_categoria`, `descripcion`),
   INDEX `fk_categoria_categoria1_idx` (`id_categoria_superior` ASC) VISIBLE,
   CONSTRAINT `fk_categoria_categoria1`
     FOREIGN KEY (`id_categoria_superior`)
-    REFERENCES `bbdd_eventos_dam`.`categoria` (`id_categoria`))
+    REFERENCES `bbdd_eventos_dam`.`categoria` (`id_categoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -253,16 +84,20 @@ CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`artista_evento` (
   `artista_id_categoria` INT NOT NULL,
   `artista_nombre` VARCHAR(100) NOT NULL,
   `evento_nombre` VARCHAR(255) NOT NULL,
-  `salario` DECIMAL(10,2) NULL DEFAULT NULL,
-  PRIMARY KEY (`artista_id_categoria`, `artista_nombre`, `evento_nombre`),
+  `salario` DECIMAL(10,2) NULL,
   INDEX `fk_artista_evento_artista1_idx` (`artista_id_categoria` ASC, `artista_nombre` ASC) VISIBLE,
   INDEX `fk_artista_evento_evento1_idx` (`evento_nombre` ASC) VISIBLE,
+  PRIMARY KEY (`artista_id_categoria`, `artista_nombre`, `evento_nombre`),
   CONSTRAINT `fk_artista_evento_artista1`
     FOREIGN KEY (`artista_id_categoria` , `artista_nombre`)
-    REFERENCES `bbdd_eventos_dam`.`artista` (`id_categoria` , `nombre`),
+    REFERENCES `bbdd_eventos_dam`.`artista` (`id_categoria` , `nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_artista_evento_evento1`
     FOREIGN KEY (`evento_nombre`)
-    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`))
+    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -284,7 +119,9 @@ CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`categoria_evento` (
     REFERENCES `bbdd_eventos_dam`.`categoria` (`id_categoria`),
   CONSTRAINT `fk_categoria_evento_evento1`
     FOREIGN KEY (`nombre_evento`)
-    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`))
+    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -305,28 +142,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `bbdd_eventos_dam`.`patrocinador_artistas`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bbdd_eventos_dam`.`patrocinador_artistas` ;
-
-CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`patrocinador_artistas` (
-  `id_categoria` INT NOT NULL,
-  `nombre_artista` VARCHAR(100) NOT NULL,
-  `razon_social` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id_categoria`, `nombre_artista`, `razon_social`),
-  INDEX `fk_patrocinador_artistas_patrocinador1_idx` (`razon_social` ASC) VISIBLE,
-  CONSTRAINT `fk_patrocinador_artistas_artista1`
-    FOREIGN KEY (`id_categoria` , `nombre_artista`)
-    REFERENCES `bbdd_eventos_dam`.`artista` (`id_categoria` , `nombre`),
-  CONSTRAINT `fk_patrocinador_artistas_patrocinador1`
-    FOREIGN KEY (`razon_social`)
-    REFERENCES `bbdd_eventos_dam`.`patrocinador` (`razon_social`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
 -- Table `bbdd_eventos_dam`.`patrocinador_evento`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `bbdd_eventos_dam`.`patrocinador_evento` ;
@@ -338,46 +153,48 @@ CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`patrocinador_evento` (
   PRIMARY KEY (`nombre_evento`, `razon_social`),
   INDEX `fk_patrocinador_evento_patrocinador1_idx` (`razon_social` ASC) VISIBLE,
   INDEX `fk_patrocinador_evento_evento1_idx` (`nombre_evento` ASC) VISIBLE,
-  CONSTRAINT `fk_patrocinador_evento_evento1`
-    FOREIGN KEY (`nombre_evento`)
-    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`),
   CONSTRAINT `fk_patrocinador_evento_patrocinador1`
     FOREIGN KEY (`razon_social`)
-    REFERENCES `bbdd_eventos_dam`.`patrocinador` (`razon_social`))
+    REFERENCES `bbdd_eventos_dam`.`patrocinador` (`razon_social`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_patrocinador_evento_evento1`
+    FOREIGN KEY (`nombre_evento`)
+    REFERENCES `bbdd_eventos_dam`.`evento` (`nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-USE `bbdd_repuestos_gamer` ;
 
 -- -----------------------------------------------------
--- procedure insert_data
+-- Table `bbdd_eventos_dam`.`patrocinador_artistas`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `bbdd_eventos_dam`.`patrocinador_artistas` ;
 
-USE `bbdd_repuestos_gamer`;
-DROP procedure IF EXISTS `bbdd_repuestos_gamer`.`insert_data`;
+CREATE TABLE IF NOT EXISTS `bbdd_eventos_dam`.`patrocinador_artistas` (
+  `id_categoria` INT NOT NULL,
+  `nombre_artista` VARCHAR(100) NOT NULL,
+  `razon_social` VARCHAR(255) NOT NULL,
+  INDEX `fk_patrocinador_artistas_patrocinador1_idx` (`razon_social` ASC) VISIBLE,
+  PRIMARY KEY (`id_categoria`, `nombre_artista`, `razon_social`),
+  CONSTRAINT `fk_patrocinador_artistas_patrocinador1`
+    FOREIGN KEY (`razon_social`)
+    REFERENCES `bbdd_eventos_dam`.`patrocinador` (`razon_social`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_patrocinador_artistas_artista1`
+    FOREIGN KEY (`id_categoria` , `nombre_artista`)
+    REFERENCES `bbdd_eventos_dam`.`artista` (`id_categoria` , `nombre`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
-DELIMITER $$
-USE `bbdd_repuestos_gamer`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_data`(IN num_records INT)
-BEGIN
-  DECLARE i INT DEFAULT 1;
-
-  WHILE i <= num_records DO
-    INSERT INTO datos (nombre, edad, ciudad, salario)
-    VALUES (CONCAT('Nombre', i), RAND() * 100, CONCAT('Ciudad', i), RAND() * 10000);
-
-    SET i = i + 1;
-  END WHILE;
-END$$
-
-DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
 
 
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
@@ -399,7 +216,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 --
 -- Dumping data for table `artista`
---
+-- Insert de artistas
 
 LOCK TABLES `artista` WRITE;
 /*!40000 ALTER TABLE `artista` DISABLE KEYS */;
@@ -486,4 +303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-03 18:25:49
+-- Dump completed on 2025-02-24 12:21:16
