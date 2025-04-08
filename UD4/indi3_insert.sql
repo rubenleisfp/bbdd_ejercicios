@@ -1,4 +1,4 @@
-use indie3; 
+use indi3; 
 
 delete from order_item where order_id>0;
 delete from orders where order_id>0;
