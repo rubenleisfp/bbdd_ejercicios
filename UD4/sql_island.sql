@@ -9,7 +9,7 @@ select * from inhabitant where state='friendly' and job ='weaponsmith';
 -- 4 Oh, that does not look good. Maybe other friendly smiths can help you out, e.g. a blacksmith. Try out: job LIKE '%smith' to find all inhabitants whose job ends with 'smith' (% is a wildcard for any number of characters)
 select * from inhabitant where state='friendly' and job like'%smith';
 -- 5 No need to call me stranger! What's my personid? (Hint: Use a SELECT query without an asterisk. In former queries, the * stands for: all columns. Instead of the star, you can also address one or more columns (seperated by a comma) and you will only get the columns you need.)
-select villageid from  inhabitant where name = 'Stranger';
+select personid from  inhabitant where name = 'Stranger';
 -- 6 I can offer to make you a sword for 150 gold. That's the cheapest you will find! How much gold do you have?
 select gold from  inhabitant where name = 'Stranger';
 -- 7 Damn! No mon, no fun. There has to be another option to earn gold other than going to work. Maybe I could collect ownerless items and sell them! Can I make a list of all items that don't belong to anyone? (Hint: You can recognize ownerless items by: WHERE owner IS NULL)
@@ -34,7 +34,9 @@ select INHABITANT.name from INHABITANT inner join VILLAGE on INHABITANT.personid
 select count(*) from INHABITANT inner join VILLAGE on INHABITANT.villageid = VILLAGE.villageid where village.name='Onionville' and INHABITANT.gender='f';
 -- 16. Oh, only one woman. What's her name?
 select INHABITANT.name from INHABITANT inner join VILLAGE on INHABITANT.villageid = VILLAGE.villageid where village.name='Onionville' and INHABITANT.gender='f';
--- 17. Oh no, baking bread alone can't solve my problems. If I continue working and selling items though, I could earn more gold than the worth of gold inventories of all bakers, dealers and merchants together. How much gold is that?
+-- 17. Oh no, baking bread alone can't solve my problems. 
+-- If I continue working and selling items though, I could earn more gold than the worth of gold inventories of all bakers, 
+-- dealers and merchants together. How much gold is that?
 SELECT SUM(inhabitant.gold) 
 FROM inhabitant 
 WHERE job = "baker" 

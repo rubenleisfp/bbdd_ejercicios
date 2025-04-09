@@ -331,9 +331,10 @@ select SUM(amount) from sakila.customer inner join sakila.payment on customer.cu
 where email='JOEL.FRANCISCO@sakilacustomer.org';
 
 
--- Ejemplos de LEFT JOIN
+-- Ejemplos de LEFT JOIN y RIGHT JOIN
 select * from clientes inner join pedidos on pedidos.cliente_id = clientes.id;
 select * from clientes left join pedidos on pedidos.cliente_id = clientes.id;
+select * from pedidos right join clientes on pedidos.cliente_id = clientes.id;
 
 -- 4.4.15a left join
 -- A) Dentro de la BBDD bbdd_tienda. Obtén el nombre, apellido de todos los clientes y de aquellos que hayan comprado algo, el nombre del producto.
