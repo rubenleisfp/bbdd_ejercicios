@@ -219,8 +219,6 @@ select * from sakila.film where rating not in ('PG');
 -- 4.4.13.a alias
 select * from sakila.customer as NUM_CLIENTES_RU where email like 'RU%';
 
--- 4.4.14a inner join
-
 -- Ejemplo algebra relacional
 DROP TABLE IF EXISTS `r`;
 CREATE TABLE `r` (
@@ -257,6 +255,7 @@ select r.x, r.n, s.x,r.n from r inner join s
 select r.x, r.n, s.x,r.n from r inner join s where r.x = s.x
 
 
+-- 4.4.14a inner join
 -- A) Muestra las ciudades con su país correspondiente al lado, ordenadas alfabeticamente.
 SELECT city, country FROM sakila.city inner join sakila.country on city.country_id = country.country_id order by city;
 
@@ -331,6 +330,11 @@ select  title, email from sakila.customer inner join sakila.rental on customer.c
 select SUM(amount) from sakila.customer inner join sakila.payment on customer.customer_id=payment.customer_id
 where email='JOEL.FRANCISCO@sakilacustomer.org';
 
+
+-- Ejemplos de LEFT JOIN
+select * from clientes inner join pedidos on pedidos.cliente_id = clientes.id;
+select * from clientes left join pedidos on pedidos.cliente_id = clientes.id;
+
 -- 4.4.15a left join
 -- A) Dentro de la BBDD bbdd_tienda. Obtén el nombre, apellido de todos los clientes y de aquellos que hayan comprado algo, el nombre del producto.
 SELECT clientes.nombre, clientes.apellido, pedidos.producto FROM bbdd_tienda.clientes LEFT JOIN bbdd_tienda.pedidos ON clientes.id = pedidos.cliente_id;
@@ -356,12 +360,7 @@ SELECT name FROM sakila.category
 		FROM film_category
 	);
     
- 	FROM film_category
-	);
-    
-    
 -- 4.4.16 subqueries
-
 -- A) Muestra las ciudades que pertenecen a España
 SELECT *
 FROM sakila.city 
