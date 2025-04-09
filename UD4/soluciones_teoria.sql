@@ -220,6 +220,43 @@ select * from sakila.film where rating not in ('PG');
 select * from sakila.customer as NUM_CLIENTES_RU where email like 'RU%';
 
 -- 4.4.14a inner join
+
+-- Ejemplo algebra relacional
+DROP TABLE IF EXISTS `r`;
+CREATE TABLE `r` (
+  `Id` int NOT NULL,
+  `X` char(1) NOT NULL,
+  `N` int NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `r` WRITE;
+INSERT INTO `r` VALUES (1,'a',1),(2,'a',2),(3,'b',3);
+UNLOCK TABLES;
+
+CREATE TABLE `s` (
+  `Id` int NOT NULL,
+  `X` char(1) DEFAULT NULL,
+  `N` int DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `s` WRITE;
+INSERT INTO `s` VALUES (1,'a',2),(2,'b',4);
+UNLOCK TABLES;
+
+LOCK TABLES `tipos_datos` WRITE;
+
+UNLOCK TABLES;
+
+
+--Producto cartesiano
+select r.x, r.n, s.x,r.n from r inner join s
+
+--Producto cartesiano con condicion
+select r.x, r.n, s.x,r.n from r inner join s where r.x = s.x
+
+
 -- A) Muestra las ciudades con su país correspondiente al lado, ordenadas alfabeticamente.
 SELECT city, country FROM sakila.city inner join sakila.country on city.country_id = country.country_id order by city;
 
