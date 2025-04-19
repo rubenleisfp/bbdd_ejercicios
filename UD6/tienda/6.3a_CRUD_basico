@@ -1,35 +1,35 @@
 1. Inserta un producto llamado "Webcam Full HD", con precio 39.99 y stock 25.
-db.producto.insertOne({
-  nombre: "Webcam Full HD",
-  precio: 39.99,
-  stock: 25
-})
+{
+  "nombre": "Webcam Full HD",
+  "precio": 39.99,
+  "stock": 25
+}
 
 2. Inserta dos productos a la vez:
 "Hub USB 4 puertos", 12.95€, stock: 40
 "Silla Ergonómica", 129.99€, stock: 6
 
-db.producto.insertMany([
+[
   {
-    nombre: "Hub USB 4 puertos",
-    precio: 12.95,
-    stock: 40
+    "nombre": "Hub USB 4 puertos",
+    "precio": 12.95,
+    "stock": 40
   },
   {
-    nombre: "Silla Ergonómica",
-    precio: 129.99,
-    stock: 6
+    "nombre": "Silla Ergonómica",
+    "precio": 129.99,
+    "stock": 6
   }
-])
+]
 
 3. Elimina el producto cuyo nombre sea "Alfombrilla RGB".
-db.producto.deleteOne({ nombre: "Alfombrilla RGB" })
+db.productos.deleteOne({ nombre: "Alfombrilla RGB" })
 
 4. Elimina todos los productos con stock igual a 0.
-db.producto.deleteMany({ stock: 0 })
+db.productos.deleteMany({ stock: 0 })
 
 5. Actualiza el precio del producto llamado "Monitor 27" 4K" a 279.99 y su stock a 10.
-db.producto.updateOne(
+db.productos.updateOne(
   { nombre: "Monitor 27\" 4K" },
   { $set: { precio: 279.99, stock: 10 } }
 )
