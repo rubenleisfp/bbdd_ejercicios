@@ -1,0 +1,31 @@
+Usa la colección producto para resolver las siguientes búsquedas. Debajo de cada una se muestra la solución esperada.
+
+1. Buscar todos los productos con un precio menor a 50.
+db.producto.find({ precio: { $lt: 50 } })
+
+2. Buscar los productos con un stock mayor o igual a 20.
+db.producto.find({ stock: { $gte: 20 } })
+
+3. Buscar el producto cuyo nombre sea exactamente "Ratón Inalámbrico".
+db.producto.find({ nombre: "Ratón Inalámbrico" })
+
+4. Buscar productos con un precio entre 50 y 100, ambos inclusive.
+db.producto.find({ precio: { $gte: 50, $lte: 100 } })
+
+5. Buscar productos cuyo stock sea menor que 10.
+db.producto.find({ stock: { $lt: 10 } })
+
+6. Buscar productos con un precio superior a 200.
+db.producto.find({ precio: { $gt: 200 } })
+
+7. Buscar productos con un precio igual a 64.95.
+db.producto.find({ precio: 64.95 })
+
+8. Buscar todos los productos cuyo nombre contenga la palabra "RGB".
+db.producto.find({ nombre: /RGB/ })
+
+9. Buscar productos cuyo nombre empiece por "M".
+db.producto.find({ nombre: /^M/ })
+
+10. Buscar productos que tengan un stock entre 10 y 20 (ambos inclusive).
+db.producto.find({ stock: { $gte: 10, $lte: 20 } })

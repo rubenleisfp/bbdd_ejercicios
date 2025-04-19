@@ -1,0 +1,31 @@
+Usa la colección producto para resolver las siguientes búsquedas. Debajo de cada una se muestra la solución esperada.
+
+11. Buscar productos cuyo nombre no sea "Teclado Gaming".
+db.producto.find({ nombre: { $ne: "Teclado Gaming" } })
+
+12. Buscar productos cuyo nombre contenga la palabra "Bluetooth", sin importar mayúsculas/minúsculas.
+db.producto.find({ nombre: /bluetooth/i })
+
+13. Buscar productos con nombre que contenga la palabra "Disco" o "Fuente".
+db.producto.find({ nombre: { $in: [/Disco/, /Fuente/] } })
+
+14. Buscar productos con precio distinto de 19.95.
+db.producto.find({ precio: { $ne: 19.95 } })
+
+15. Buscar productos cuyo nombre tenga exactamente 3 palabras.
+db.producto.find({ nombre: /^\S+\s\S+\s\S+$/ })
+
+16. Buscar productos con stock igual a 5 o 7.
+db.producto.find({ stock: { $in: [5, 7] } })
+
+17. Buscar productos cuyo precio esté entre 75 y 300, pero excluyendo el 75 y el 300.
+db.producto.find({ precio: { $gt: 75, $lt: 300 } })
+
+18. Buscar productos cuyo nombre termine en "4K".
+db.producto.find({ nombre: /4K$/ })
+
+19. Buscar productos cuyo precio sea múltiplo de 10 (usando $mod).
+db.producto.find({ precio: { $mod: [10, 0] } })
+
+20. Buscar productos que tengan un nombre que incluya números.
+db.producto.find({ nombre: /\d/ })

@@ -1,0 +1,26 @@
+ Solución Ejercicio 6.6.a
+1. Agrupa productos por stock y cuenta cuántos hay de cada valor
+db.productos.aggregate([
+  {
+    $group: {
+      _id: "$stock",
+      total: { $count: {} }
+    }
+  }
+])
+Esto agrupa todos los productos que tienen el mismo valor de stock y muestra cuántos hay en cada grupo.
+
+ 2. Calcula el precio medio de los productos
+db.productos.aggregate([
+  {
+    $group: {
+      _id: null,
+      precio_medio: { $avg: "$precio" }
+    }
+  }
+])
+Se agrupan todos los documentos y se calcula el promedio del campo precio.
+
+ 3. Muestra los productos ordenados por precio descendente
+
+db.productos.find().sort({ precio: -1 })
