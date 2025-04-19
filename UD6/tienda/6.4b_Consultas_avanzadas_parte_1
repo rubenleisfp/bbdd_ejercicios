@@ -21,8 +21,8 @@ db.producto.find({ precio: { $gt: 200 } })
 7. Buscar productos con un precio igual a 64.95.
 db.producto.find({ precio: 64.95 })
 
-8. Buscar todos los productos cuyo nombre contenga la palabra "RGB".
-db.producto.find({ nombre: /RGB/ })
+8. Buscar todos los productos cuyo nombre contenga la palabra "at".
+db.producto.find({ nombre: /at/ })
 
 9. Buscar productos cuyo nombre empiece por "M".
 db.producto.find({ nombre: /^M/ })

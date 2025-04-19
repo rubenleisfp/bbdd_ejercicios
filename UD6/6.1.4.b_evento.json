@@ -1,0 +1,26 @@
+{
+    "nombre": "Festival SonRías Baixas",
+    "fecha": "2025-08-01",
+    "ubicacion": {
+      "ciudad": "Bueu",
+      "direccion": "Avda. Montero Ríos, s/n",
+      "pais": "España"
+    },
+    "artistas": [
+      { "nombre": "Tanxugueiras", "nacionalidad": "España", "genero": "Folk" },
+      { "nombre": "Boyanka Kostova", "nacionalidad": "España", "genero": "Trap Galego" }
+    ],
+    "aforo_maximo": 5000,
+    "entradas_disponibles": 1200,
+    "accesible": true,
+    "comentarios": [
+      { "usuario": "ana_gz", "puntuacion": 5, "comentario": "¡Espectacular!" },
+      { "usuario": "xose22", "puntuacion": 4, "comentario": "Boa música e ambiente." }
+    ],
+    "contacto": {
+      "email": "info@sonriasbaixas.gal",
+      "telefono": "+34 986 123 456"
+    },
+    "cancelado": null
+  }
+  

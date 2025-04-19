@@ -1,0 +1,36 @@
+ Solución al Ejercicio 6.5.a
+1. Crear la colección clientes con 2 documentos embebidos
+db.clientes.insertMany([
+  {
+    nombre: "Laura",
+    email: "laura@mail.com",
+    pedidos: [
+      {
+        fecha: "2025-04-01",
+        libros: [
+          { titulo: "El Hobbit", precio: 20.0 },
+          { titulo: "1984", precio: 15.0 }
+        ]
+      },
+      {
+        fecha: "2025-04-10",
+        libros: [
+          { titulo: "Cien años de soledad", precio: 18.5 }
+        ]
+      }
+    ]
+  },
+  {
+    nombre: "Carlos",
+    email: "carlos@mail.com",
+    pedidos: [
+      {
+        fecha: "2025-04-05",
+        libros: [
+          { titulo: "Dune", precio: 22.0 },
+          { titulo: "Fundación", precio: 19.0 }
+        ]
+      }
+    ]
+  }
+])
