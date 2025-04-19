@@ -1,0 +1,53 @@
+[
+    {
+      "nombre": "Teclado Gaming",
+      "precio": 49.99,
+      "stock": 15
+    },
+    {
+      "nombre": "Ratón Inalámbrico",
+      "precio": 19.95,
+      "stock": 32
+    },
+    {
+      "nombre": "Monitor 27\" 4K",
+      "precio": 299.99,
+      "stock": 8
+    },
+    {
+      "nombre": "Auriculares Bluetooth",
+      "precio": 59.90,
+      "stock": 21
+    },
+    {
+      "nombre": "Alfombrilla RGB",
+      "precio": 14.50,
+      "stock": 50
+    },
+    {
+      "nombre": "Caja ATX con ventiladores",
+      "precio": 89.99,
+      "stock": 5
+    },
+    {
+      "nombre": "Disco Duro Externo 1TB",
+      "precio": 74.25,
+      "stock": 17
+    },
+    {
+      "nombre": "Fuente de alimentación 650W",
+      "precio": 64.95,
+      "stock": 10
+    },
+    {
+      "nombre": "Memoria RAM 16GB DDR4",
+      "precio": 79.90,
+      "stock": 12
+    },
+    {
+      "nombre": "Procesador AMD Ryzen 5",
+      "precio": 199.99,
+      "stock": 7
+    }
+  ]
+  
