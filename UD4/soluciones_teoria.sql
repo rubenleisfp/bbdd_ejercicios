@@ -254,6 +254,11 @@ select r.x, r.n, s.x,r.n from r inner join s
 --Producto cartesiano con condicion
 select r.x, r.n, s.x,r.n from r inner join s where r.x = s.x
 
+--Ejemplo paises
+select * from city inner join country
+on city.CountryCode = country.Code
+where country.Name = 'Spain'
+
 
 -- 4.4.14a inner join
 -- A) Muestra las ciudades con su país correspondiente al lado, ordenadas alfabeticamente.
