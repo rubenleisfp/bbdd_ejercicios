@@ -100,12 +100,10 @@ SELECT SUM(rental_rate) as suma_rental
 FROM film;
 
 -- 23. Pelicula con mayor duración.
-SELECT MAX(length) as mayor_duracion 
-FROM film;
+select title, length from film order by length desc limit 1
 
 -- 24. Película con menor duración.
-SELECT MIN(length) as mayor_duracion 
-FROM film;
+select title, length from film order by length asc limit 1
 
 
 
