@@ -1,0 +1,90 @@
+[
+    {
+      "dni": "11111111A",
+      "nombre": "Alicia",
+      "asignaturas": [
+        { "nombre": "PRO", "nota": 6 },
+        { "nombre": "BBDD", "nota": 8 },
+        { "nombre": "AD", "nota": 7 }
+      ]
+    },
+    {
+      "dni": "22222222B",
+      "nombre": "Bruno",
+      "asignaturas": [
+        { "nombre": "LM", "nota": 5 },
+        { "nombre": "PRO", "nota": 4 },
+        { "nombre": "AD", "nota": 3 }
+      ]
+    },
+    {
+      "dni": "33333333C",
+      "nombre": "Carla",
+      "asignaturas": [
+        { "nombre": "BBDD", "nota": 9 },
+        { "nombre": "PRO", "nota": 9 },
+        { "nombre": "SINF", "nota": 6 }
+      ]
+    },
+    {
+      "dni": "44444444D",
+      "nombre": "Diego",
+      "asignaturas": [
+        { "nombre": "LM", "nota": 7 },
+        { "nombre": "BBDD", "nota": 4 },
+        { "nombre": "AD", "nota": 6 }
+      ]
+    },
+    {
+      "dni": "55555555E",
+      "nombre": "Elena",
+      "asignaturas": [
+        { "nombre": "PRO", "nota": 10 },
+        { "nombre": "LM", "nota": 9 }
+      ]
+    },
+    {
+      "dni": "66666666F",
+      "nombre": "Fernando",
+      "asignaturas": [
+        { "nombre": "SINF", "nota": 5 },
+        { "nombre": "AD", "nota": 8 }
+      ]
+    },
+    {
+      "dni": "77777777G",
+      "nombre": "Gabriela",
+      "asignaturas": [
+        { "nombre": "PRO", "nota": 3 },
+        { "nombre": "BBDD", "nota": 4 },
+        { "nombre": "LM", "nota": 2 }
+      ]
+    },
+    {
+      "dni": "88888888H",
+      "nombre": "Hugo",
+      "asignaturas": [
+        { "nombre": "PRO", "nota": 7 },
+        { "nombre": "AD", "nota": 9 },
+        { "nombre": "LM", "nota": 6 }
+      ]
+    },
+    {
+      "dni": "99999999I",
+      "nombre": "Inés",
+      "asignaturas": [
+        { "nombre": "BBDD", "nota": 10 },
+        { "nombre": "SINF", "nota": 10 }
+      ]
+    },
+    {
+      "dni": "10101010J",
+      "nombre": "Javier",
+      "asignaturas": [
+        { "nombre": "AD", "nota": 5 },
+        { "nombre": "LM", "nota": 5 },
+        { "nombre": "BBDD", "nota": 5 }
+      ]
+    }
+  ]
+  
