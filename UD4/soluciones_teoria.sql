@@ -402,47 +402,47 @@ SELECT name FROM sakila.category
 SET autocommit = 0;
 
 -- b) Insertar cuentas y hacer ROLLBACK
-INSERT INTO cuenta VALUES (1, 2000), (2, 0);
+INSERT INTO cuentas_bancarias VALUES (1, 2000), (2, 0);
 ROLLBACK;
 
 -- Verificar que no se insertaron
-SELECT * FROM cuenta;
+SELECT * FROM cuentas_bancarias;
 
 -- c) Insertar cuentas y hacer COMMIT
-INSERT INTO cuenta VALUES (1, 2000), (2, 0);
+INSERT INTO cuentas_bancarias VALUES (1, 2000), (2, 0);
 COMMIT;
 
 -- Verificar que ahora sí están
-SELECT * FROM cuenta;
+SELECT * FROM cuentas_bancarias;
 
 -- d) Transferencia de 1000€ con COMMIT
 START TRANSACTION;
 
-UPDATE cuenta SET saldo = saldo - 1000 WHERE id = 1;
-UPDATE cuenta SET saldo = saldo + 1000 WHERE id = 2;
+UPDATE cuentas_bancarias SET saldo = saldo - 1000 WHERE id = 1;
+UPDATE cuentas_bancarias SET saldo = saldo + 1000 WHERE id = 2;
 
 COMMIT;
 
 -- Verificar después de la transferencia
-SELECT * FROM cuenta;
+SELECT * FROM cuentas_bancarias;
 
 -- e) Simular error entre los 2 updates (rollback + señal)
 -- Restaurar estado inicial para probar de nuevo
-DELETE FROM cuenta;
-INSERT INTO cuenta VALUES (1, 2000), (2, 0);
+DELETE FROM cuentas_bancarias;
+INSERT INTO cuentas_bancarias VALUES (1, 2000), (2, 0);
 COMMIT;
 
 START TRANSACTION;
 
 -- Primer update: quita dinero de cuenta 1
-UPDATE cuenta SET saldo = saldo - 1000 WHERE id = 1;
+UPDATE cuentas_bancarias SET saldo = saldo - 1000 WHERE id = 1;
 
 -- Simular error y lanzar rollback manualmente
 ROLLBACK;
 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente en cuenta destino';
 
 -- Esta línea no se llega a ejecutar
-UPDATE cuenta SET saldo = saldo + 1000 WHERE id = 2;
+UPDATE cuentas_bancarias SET saldo = saldo + 1000 WHERE id = 2;
 
 -- Verificar el estado final
-SELECT * FROM cuenta;
+SELECT * FROM cuentas_bancarias;
