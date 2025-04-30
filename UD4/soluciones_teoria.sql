@@ -383,12 +383,11 @@ SELECT email
 FROM sakila.customer 
 WHERE address_id IN (SELECT address_id FROM sakila.address WHERE email LIKE '%M%');
 
--- D) Busca en Sakila peliculas sin categoria asignada. Resultados: 0 registros
-SELECT name FROM sakila.category
-	WHERE category_id NOT IN (
-		SELECT category_id
-		FROM film_category
-	);
+-- D) Busca en Sakila el titulo de las peliculas de la categoria "Animation" usando al
+-- menos una subquery. (resultados: 66)
+select title from film f
+inner join film_category fc on  f.film_id = fc.film_id
+where fc.category_id = (select category_id from sakila.category where name ="Animation");
 
 -- 4.5 Transactions
   CREATE TABLE `cuentas_bancarias` (
