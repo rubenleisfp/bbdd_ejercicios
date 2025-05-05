@@ -31,3 +31,49 @@
 🔟 Alumnos que tienen todas las asignaturas con nota mayor o igual a 5
 (Consulta aproximada usando $not + $elemMatch)
 { "asignaturas": { "$not": { "$elemMatch": { "nota": { "$lt": 5 } } } } }
+
+
+📚 CONSULTAS EN MONGODB CON ARRAYS (Colección: alumnos)
+
+1️⃣ Alumnos que tienen la asignatura "BBDD"
+{ "asignaturas.nombre": "BBDD" }
+
+2️⃣ Alumnos con nota mayor de 8 en alguna asignatura
+{ "asignaturas.nota": { "$gt": 8 } }
+
+3️⃣ Alumnos con la asignatura "PRO" y nota menor que 5
+{ "asignaturas": { "$elemMatch": { "nombre": "PRO", "nota": { "$lt": 5 } } } }
+
+4️⃣ Alumnos que tienen tanto "BBDD" como "AD"
+{ "asignaturas.nombre": { "$all": ["BBDD", "AD"] } }
+
+5️⃣ Alumnos que NO tienen la asignatura "PRO"
+(OPCIÓN SEGURA usando $not con $elemMatch)
+{ "asignaturas": { "$not": { "$elemMatch": { "nombre": "PRO" } } } }
+
+6️⃣ Alumnos con nota 10 en alguna asignatura
+{ "asignaturas.nota": 10 }
+
+7️⃣ Alumnos con alguna asignatura suspensa (nota < 5)
+{ "asignaturas.nota": { "$lt": 5 } }
+
+8️⃣ Alumnos con exactamente 3 asignaturas
+{ "asignaturas": { "$size": 3 } }
+
+9️⃣ Alumnos con la asignatura "LM" y nota 9
+{ "asignaturas": { "$elemMatch": { "nombre": "LM", "nota": 9 } } }
+
+🔟 Alumnos que tienen todas las asignaturas con nota mayor o igual a 5
+(Consulta aproximada usando $not + $elemMatch)
+{ "asignaturas": { "$not": { "$elemMatch": { "nota": { "$lt": 5 } } } } }
+
+11 Alumno de nombre Alicia con un 7 en LM
+{
+  "nombre": "Alicia",
+  "asignaturas": {
+    "$elemMatch": {
+      "nombre": "AD",
+      "nota": 7
+    }
+  }
+}
