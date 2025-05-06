@@ -157,13 +157,13 @@ INNER JOIN film_actor fa ON f.film_id = fa.film_id
 INNER JOIN actor a ON a.actor_id = fa.actor_id
 ORDER BY f.title;
 
--- 8. Lista cada pelicula y el numero de actores que han participado en ella ordenadas de mas actores a menos. Resultado: Ej: ACADEMY ... 10
-  SELECT f.title, COUNT(a.actor_id) AS 'Number of Actors'
+-- 8. Lista cada pelicula y el numero de actores que han participado en ella ordenadas de mas actores a menos. Resultado: Ej: LAMBS CINCINATTI ... 15
+SELECT f.title, COUNT(fa.actor_id) AS NUMBER_ACTORS
   FROM film f
-  INNER join film_actor a 
-  ON (f.film_id = a.film_id)
+  INNER join film_actor fa 
+  ON (f.film_id = fa.film_id)
   GROUP BY f.title
-  ORDER BY 'Number of Actors' DESC;
+  ORDER BY NUMBER_ACTORS DESC;
 
 -- 9. Ventas quiere dar promoción a todas las peliculas familiares. Identificalas. Resultado: 69 registros
   SELECT title, c.name

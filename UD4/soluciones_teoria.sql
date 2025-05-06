@@ -378,16 +378,21 @@ SELECT count(*)
 FROM sakila.customer 
 WHERE store_id IN (SELECT store_id FROM sakila.store WHERE manager_staff_id = 2);
 
--- C) Muestra el email de los clientes y el nombre de su direccion.  Muestra solo aquellos cuya email empieza por M (19 resultados)
+-- C)  Muestra el email de los clientes cuya dirección comienza por 262
 SELECT email
 FROM sakila.customer 
-WHERE address_id IN (SELECT address_id FROM sakila.address WHERE email LIKE '%M%');
+WHERE address_id IN (SELECT address_id FROM sakila.address WHERE address LIKE '262%');
 
 -- D) Busca en Sakila el titulo de las peliculas de la categoria "Animation" usando al
 -- menos una subquery. (resultados: 66)
 select title from film f
 inner join film_category fc on  f.film_id = fc.film_id
 where fc.category_id = (select category_id from sakila.category where name ="Animation");
+
+select title from film f
+inner join film_category fc on  f.film_id = fc.film_id
+inner join category c on fc.category_id = c.category_id
+where c.name="Animation";
 
 -- 4.5 Transactions
   CREATE TABLE `cuentas_bancarias` (
