@@ -1,0 +1,66 @@
+A) Muestra para cada asignatura su nombre y su nota media, redondeada a un decimal, ordenadas de mayor a menor nota media.
+db.alumnos.aggregate([
+  { $unwind: "$asignaturas" },
+  { 
+    $group: {
+      _id: "$asignaturas.nombre",
+      notaMedia: { $avg: "$asignaturas.nota" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      asignatura: "$_id",
+      notaMedia: { $round: ["$notaMedia", 1] }
+    }
+  },
+  { $sort: { notaMedia: -1 } }
+])
+
+B) Muestra los nombres de los alumnos que han obtenido más de 8 en cualquier asignatura.
+db.alumnos.aggregate([
+  { $unwind: "$asignaturas" },
+  { $match: { "asignaturas.nota": { $gt: 8 } } },
+  { $group: { _id: "$nombre" } },
+  { $project: { _id: 0, nombre: "$_id" } }
+])
+
+
+C) Muestra cada asignatura y el número de alumnos que la cursan.
+db.alumnos.aggregate([
+  { $unwind: "$asignaturas" },
+  { 
+    $group: {
+      _id: "$asignaturas.nombre",
+      totalAlumnos: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      asignatura: "$_id",
+      totalAlumnos: 1
+    }
+  },
+  { $sort: { totalAlumnos: -1 } }
+])
+
+
+D) Muestra para cada asignatura cuál es la mejor nota que ha obtenido algún alumno.
+db.alumnos.aggregate([
+  { $unwind: "$asignaturas" },
+  { 
+    $group: {
+      _id: "$asignaturas.nombre",
+      mejorNota: { $max: "$asignaturas.nota" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      asignatura: "$_id",
+      mejorNota: 1
+    }
+  },
+  { $sort: { mejorNota: -1 } }
+])
