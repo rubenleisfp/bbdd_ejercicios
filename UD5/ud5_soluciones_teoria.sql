@@ -67,9 +67,8 @@ END //
 
 
 -- B) Crea un procedimiento almacenado llamado GetCityByID que reciba un cityId.
--- Si existe la ciudad, devuelve información de la ciudad y del pais.alter
+-- Si existe la ciudad, devuelve información de la ciudad y del pais
 -- Sino existe devolvera el siguiente texto "City not found"
-
 DELIMITER //
 
 CREATE PROCEDURE GetCityByID(IN city_id INT)
@@ -91,8 +90,6 @@ BEGIN
 END;
 //
 DELIMITER ;
-
-
 
 -- 5.3a Triggers
 -- Es el de teoria
