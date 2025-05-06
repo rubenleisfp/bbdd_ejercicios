@@ -61,8 +61,9 @@ DELIMITER //
 
 CREATE PROCEDURE CitiesBeginWith (IN letter VARCHAR(1))
 BEGIN
-   SET @query = CONCAT(letter, '%');
-   SELECT * FROM city WHERE city LIKE @query;
+   SET parametro = CONCAT(letter, '%');
+   SELECT * FROM city WHERE city LIKE parametro; // SELECT * FROM city WHERE city LIKE 'F%';
+   
 END //
 
 
@@ -76,11 +77,11 @@ BEGIN
     DECLARE city_name VARCHAR(50);
     DECLARE country_name VARCHAR(50);
 
-    SELECT city, country
+    SELECT c.city, co.country
     INTO city_name, country_name
-    FROM city
-    INNER JOIN country ON city.country_id = country.country_id
-    WHERE city_id = city_id;
+    FROM city c
+    INNER JOIN country co ON c.country_id = co.country_id
+    WHERE c.city_id = city_id;
 
     IF city_name IS NOT NULL THEN
         SELECT city_name AS City, country_name AS Country;
