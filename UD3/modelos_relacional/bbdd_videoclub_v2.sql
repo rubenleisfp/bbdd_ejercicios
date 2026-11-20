@@ -2,6 +2,24 @@
 -- =====================================================
 -- BASE DE DATOS: bbdd_videoclub
 -- =====================================================
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema bbdd_videoclub
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `bbdd_videoclub` ;
+
+-- -----------------------------------------------------
+-- Schema bbdd_videoclub
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bbdd_videoclub` DEFAULT CHARACTER SET utf8mb3 ;
+USE `bbdd_videoclub` ;
+
 
 -- Eliminación previa de las tablas
 DROP TABLE IF EXISTS `actua`;
